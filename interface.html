@@ -75,15 +75,23 @@ jQuery("#generate-random").click(function() {
   return false;
 });
 
- jQuery("#first").keypress(function() { 
-   	if(jQuery("#first").val().length >= 2) {
+ jQuery("#first").keyup(function() { 
+   if(jQuery("#first").val().length >= 2) {
      	jQuery("#second").focus(); 
+	jQuery('#first').val(jQuery('#first').val().substr(0, 3));
     }
  });
   
-  jQuery("#second").keypress(function() { 
-   	if(jQuery("#second").val().length >= 2) {
+  jQuery("#second").keyup(function() { 
+    if(jQuery("#second").val().length >= 2) {
      	jQuery("#third").focus(); 
+	jQuery('#second').val(jQuery('#second').val().substr(0, 3));
+    }
+ }); 
+	
+jQuery("#third").keyup(function() { 
+    if(jQuery("#third").val().length >= 2) {
+	jQuery('#third').val(jQuery('#third').val().substr(0, 3));
     }
  }); 
   
