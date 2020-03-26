@@ -77,13 +77,15 @@ jQuery("#generate-random").click(function() {
 
  jQuery("#first").keyup(function() { 
    if(jQuery("#first").val().length >= 3) {
-     	jQuery("#second").focus(); 
+	jQuery("#second").val(''); 
+     	jQuery("#second").focus();
 	jQuery('#first').val(jQuery('#first').val().substr(0, 3));
     }
  });
   
   jQuery("#second").keyup(function() { 
-    if(jQuery("#second").val().length >= 3) {
+    if(jQuery("#second").val().length >= 3) { 
+	jQuery("#third").val(''); 
      	jQuery("#third").focus(); 
 	jQuery('#second').val(jQuery('#second').val().substr(0, 3));
     }
