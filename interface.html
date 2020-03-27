@@ -27,7 +27,7 @@
 			"cssBootstrap": "https://frontcdn.AtomJump.com/atomjump-frontend/bootstrap.min.css"
 		}
 	</script>
-	<script type="text/javascript" src="https://frontcdn.AtomJump.com/atomjump-frontend/chat-1.0.9.js"></script>
+	<script type="text/javascript" src="https://frontcdn.AtomJump.com/atomjump-frontend/chat-1.1.0.js"></script>
         <!--No svg support -->
         <!--[if lt IE 9]>
           <script src="https://frontcdn.AtomJump.com/atomjump-frontend/chat-1.0.7.js"></script>
@@ -118,16 +118,22 @@ jQuery("#third").keyup(function() {
 		left: 0%;
           display: none;
 }
+
+.threechar {
+	display: inline; 
+	width: 9ch; 
+	margin:6px;
+}
 </style>
 <form id="code-entered-frm">
-  <input type="text" id="first" name="first" maxlength="3" style="display: inline; width: 64px;"> <input type="text" id="second" name="second" maxlength="3" style="display: inline; width: 64px;"> <input type="text" id="third" name="third" maxlength="3" style="display: inline; width: 64px;"> <input style="display: inline;" type="submit" value="Open Forum">
+  <input type="text" id="first" name="first" maxlength="3" class="threechar"> <input type="text" id="second" name="second" maxlength="3" class="threechar"> <input type="text" id="third" name="third" maxlength="3" class="threechar"> <input style="display: inline; margin:6px;" type="submit" value="Open Forum">
 </form> 
 
 <div id="message"></div>
 
 
 
-<a style="display: none;" id="open-me" href="#comment-open-my_different_forum_name">Open special forum</a>
+<a style="display: none;" id="open-me" href="#comment-open-my_different_forum_name" data-general="decayIn:2 day">Open special forum</a>
 
 <!-- holds the popup comments. Can be anywhere between the <body> tags -->
 <div id="comment-holder"></div>
