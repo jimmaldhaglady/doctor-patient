@@ -53,6 +53,85 @@ function startMessaging() {
 
   var newUrl = "#comment-open-onetime-OneTime" + jQuery("#first").val().toUpperCase() + jQuery("#second").val().toUpperCase() + jQuery("#third").val().toUpperCase();
   jQuery("#open-me").attr("href", newUrl);
+  
+  //Get the temporary server based off the 1st char of the code. This gives around 30 different server clusters. For future scalability, adding one character gives around 1000 server clusters.
+   ajFeedback.server = "https://temp" + jQuery("#first").val().toLowerCase().substring(0,1) + ".atomjump.com/api";
+  initAtomJumpFeedback(ajFeedback);
+  
+  
+  //A repeat of chat-1.1.0.js
+		var screenWidth = jQuery(window).width();
+		var screenHeight = jQuery(window).height();
+	
+		oldScreenWidth = screenWidth;
+		var setLang = getCookie("lang");
+		if(setLang) {
+			lang = setLang;			
+		}
+		
+		var buttonWidth = adjustButtonWidth(screenWidth);
+	
+		
+	
+		//If IE10 or above, or any other browser
+		if(window.atob) {
+			var uploadStr = '&nbsp;&nbsp;<span class="comment-settings" style=""><a id="comment-upload-popup" class="comment-button" href="javascript:"><img width="' + buttonWidth + '" title="' + lsmsg.msgs[lang].uploadImagesTitle + '" src="' + ssshoutServer + '/images/upload.svg"></a></span>';
+		} else {
+			var uploadStr = '&nbsp;&nbsp;<span class="comment-settings" style=""><a class="comment-button" href="javascript:"><img title="' + lsmsg.msgs[lang].uploadImagesTitleSorry + '" src="' + ssshoutServer + '/images/noupload.png"></a></span>';
+		}
+	
+		var emoticonsStr = '&nbsp;&nbsp;<span class="comment-settings" style=""><a id="comment-emojis-popup" class="comment-button" href="javascript:"><img width="' + buttonWidth + '" title="' + lsmsg.msgs[lang].emoticonsTitle + '" src="' + ssshoutServer + '/images/emoticons.svg"></a></span>';
+	
+		if(!lsmsg.msgs[lang].helpURL) {
+			var helpURL = "https://atomjump.com/wp/user-guide/";
+		} else {
+			var helpURL = lsmsg.msgs[lang].helpURL;
+		}
+	
+		if(!lsmsg.msgs[lang].helpTitle) {
+			var helpTitle = "Help";
+		} else {
+			var helpTitle = lsmsg.msgs[lang].helpTitle;
+		}
+		var helpStr = '&nbsp;&nbsp;<span class="comment-settings comment-help"><a id="comment-help" style="" target="_blank" href="' + helpURL + '"><img width="' + buttonWidth + '" title="' + lsmsg.msgs[lang].helpTitle + '" src="' + ssshoutServer + '/images/help.svg"></a></span>';  
+		
+		
+	
+	
+	
+		jQuery(window).resize(function() {
+			//On a Window resize, rewrite the comment-holder
+			if(currentWindow.forumId != null) {
+		
+				screenWidth = jQuery(window).width();
+				screenHeight = jQuery(window).height();
+			
+				//Confirm the width has changed - if it is a mobile browser, the height will change on a keyboard input.
+				if(screenWidth != oldScreenWidth) {
+				
+					oldScreenWidth = screenWidth;
+				
+					//Show the refresh button
+					jQuery("#comment-refresh").show();
+				
+				
+				
+				}
+			}
+
+		});
+	
+	
+	
+	
+	
+		//Write the holder
+		writeCommentHolder(screenWidth, screenHeight, ssshoutServer, lsmsg.msgs[lang].settings, uploadStr, emoticonsStr, lsmsg.msgs[lang].privateMessage, helpStr);
+
+  
+  
+  
+  
   setTimeout(function() {
   	jQuery("#open-me").click();
   }, 500);
