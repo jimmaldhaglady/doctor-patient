@@ -55,7 +55,14 @@ function startMessaging() {
   jQuery("#open-me").attr("href", newUrl);
   
   //Get the temporary server based off the 1st char of the code. This gives around 30 different server clusters. For future scalability, adding one character gives around 1000 server clusters.
+  if((global.staging == "1") || (global.staging == true)) {
+  	ajFeedback.server = "https://staging.AtomJump.com/api";
+  
+  } else {
    ajFeedback.server = "https://temp" + jQuery("#first").val().toLowerCase().substring(0,1) + ".atomjump.com/api";
+  }
+  
+  
   initAtomJumpFeedback(ajFeedback);
   
   
