@@ -48,6 +48,30 @@ function makeId(length) {
    }
    return result;
 }
+
+
+function shareOnetime(myURL) {
+	
+   if (navigator.share) {
+      navigator.share({
+          title: 'AtomJump Messaging',
+          text: 'Join me to chat at:',
+          url: myURL,
+      }).then(function() {
+				console.log('Successful share'); 
+				return false;
+			}).catch(function(error) {
+				console.log('Error sharing', error);
+				return false;
+			});
+    } else {
+    	return false;
+    }    
+    
+    
+}
+
+
   
 function startMessaging() {
 
@@ -147,51 +171,67 @@ function startMessaging() {
   
   
 jQuery(document).ready(function(){
-jQuery("#generate-random").click(function() {
 
- var first = makeId(3);
-  var second = makeId(3);
-  var third = makeId(3);
-  jQuery("#first").val(first);
-  jQuery("#second").val(second);
-  jQuery("#third").val(third);
-  
-  jQuery("#throwaway-message").html("Please call your receipient, and tell them to:<br/><br/>1. Go on their phone or computer browser to: <b>ajmp.co</b> and<br/>2. Enter the 9-digit code above.<br/><br/>Then click 'Open Forum' to start chatting / uploading photos / video calling.");
-  jQuery("#throwaway-message").slideDown();
-  return false;
-});
+	var thisURL = window.location.href;
+	var arr = thisURL.split('='); 
+	var last = arr[arr.length - 1];
+	if((last !== "one-time") && (last.length == 9)) {
+		//This is a passed through code from e.g. http://ajmp.co/012345678
+		 jQuery("#first").val(last.substring(0,3).toUpperCase());
+  		 jQuery("#second").val(last.substring(3,6).toUpperCase());
+  		 jQuery("#third").val(last.substring(6,9).toUpperCase());
+  		 
+  		 startMessaging();
+	}
 
- jQuery("#first").keyup(function() { 
-   if(jQuery("#first").val().length >= 3) {
-	jQuery("#second").val(''); 
-     	jQuery("#second").focus();
-	jQuery('#first').val(jQuery('#first').val().substr(0, 3));
-    }
- });
+
+	jQuery("#generate-random").click(function() {
+
+	 var first = makeId(3);
+	  var second = makeId(3);
+	  var third = makeId(3);
+	  jQuery("#first").val(first);
+	  jQuery("#second").val(second);
+	  jQuery("#third").val(third);
+	  
+	  var shareableURL = "http://ajmp.co/" + first.toLowerCase() + second.toLowerCase() + third.toLowerCase();
+	    
+	  jQuery("#throwaway-message").html("Please call your receipient, and tell them to:<br/><br/>1. Go on their phone or computer browser to: <b>ajmp.co</b> and<br/>2. Enter the 9-digit code above.<br/><br/>Then click 'Open Forum' to start chatting / uploading photos / video calling.<br/><br/><b>Or</b> copy this shareable link <a href='" + shareableURL + "' target='_blank'>" + shareableURL + "</a> <a href='" + shareableURL + "' target='_blank'><img class='dial-height' src='/wp/atomjump/images/share.svg' width='47' height='36' border='0'></a>");
+	  jQuery("#throwaway-message").slideDown();
+	  return false;
+	});
+
+	 jQuery("#first").keyup(function() { 
+	   if(jQuery("#first").val().length >= 3) {
+		jQuery("#second").val(''); 
+			jQuery("#second").focus();
+		jQuery('#first').val(jQuery('#first').val().substr(0, 3));
+		}
+	 });
   
-  jQuery("#second").keyup(function() { 
-    if(jQuery("#second").val().length >= 3) { 
-	jQuery("#third").val(''); 
-     	jQuery("#third").focus(); 
-	jQuery('#second').val(jQuery('#second').val().substr(0, 3));
-    }
- }); 
+	  jQuery("#second").keyup(function() { 
+		if(jQuery("#second").val().length >= 3) { 
+		jQuery("#third").val(''); 
+			jQuery("#third").focus(); 
+		jQuery('#second').val(jQuery('#second').val().substr(0, 3));
+		}
+	 }); 
 	
-jQuery("#third").keyup(function() { 
-    if(jQuery("#third").val().length >= 3) {
-	jQuery('#third').val(jQuery('#third').val().substr(0, 3));
-    }
- }); 
+	jQuery("#third").keyup(function() { 
+		if(jQuery("#third").val().length >= 3) {
+		jQuery('#third').val(jQuery('#third').val().substr(0, 3));
+		}
+	 }); 
   
- jQuery('#code-entered-frm').on("submit",function(e) {
-    e.preventDefault(); // cancel the actual submit
+	 jQuery('#code-entered-frm').on("submit",function(e) {
+		e.preventDefault(); // cancel the actual submit
 
-    /* do what you want with the form */
+		/* do what you want with the form */
 
-    // Should be triggered on form submit
+		// Should be triggered on form submit
 
-    startMessaging();
-  });
+		startMessaging();
+	  });
 });
 </script>
 
