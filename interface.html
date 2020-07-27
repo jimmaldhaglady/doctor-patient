@@ -263,3 +263,47 @@ jQuery(document).ready(function(){
 
 <!-- holds the popup comments. Can be anywhere between the <body> tags -->
 <div id="comment-holder"></div>
+<script>
+  
+  jQuery(document).ready(function() {
+    jQuery("#meetingDate").hide();
+    jQuery("#meetingDatefrm").hide();
+    jQuery(".newSession").click(function(){
+      jQuery("#meetingDate").css("background-color","grey");
+      jQuery("#meetingDate").css("color","white");
+      jQuery("#meetingDate").show();
+    });
+    jQuery("#meetingDate").click(function() {
+    
+    jQuery("#meetingDatefrm").show();
+  });    jQuery("#openForum").click(function(){
+      jQuery("#meetingDate").hide();
+      jQuery("#meetingDatefrm").hide();
+     });
+});
+</script>
+<input type="button" id="meetingDate" value="Optional Meeting Date" style="border:none;"/>
+
+<form id="meetingDatefrm"><br>
+  <p>Please enter meeting date :<input id="txtDate" type="date" onchange="getdate()"/>
+</p>
+<p>
+    Session will be deleted on :<input type="text" id="follow_Date"  />
+</p>
+</form>
+<script>
+function getdate() {
+    var tt = document.getElementById('txtDate').value;
+
+    var date = new Date(tt);
+    var newdate = new Date(date);
+
+    newdate.setDate(newdate.getDate() + 2);
+    
+    var dd = newdate.getDate();
+    var mm = newdate.getMonth() + 1;
+    var y = newdate.getFullYear();
+
+    var someFormattedDate = dd + '/' + mm + '/' + y;
+    document.getElementById('follow_Date').value = someFormattedDate;
+}</script>
