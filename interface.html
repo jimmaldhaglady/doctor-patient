@@ -263,3 +263,59 @@ jQuery(document).ready(function(){
 
 <!-- holds the popup comments. Can be anywhere between the <body> tags -->
 <div id="comment-holder"></div>
+<script>
+  
+  jQuery(document).ready(function() {
+    jQuery("#meetingDate").hide();
+    jQuery("#mdate").hide();
+    jQuery("#ddate").hide();
+    jQuery(".newSession").click(function(){
+      jQuery("#meetingDate").css("background-color","grey");
+      jQuery("#meetingDate").css("color","white");
+      jQuery("#meetingDate").show();
+      jQuery("#note").hide();
+    });
+    jQuery("#meetingDate").click(function() {
+    jQuery("#meetingDate").hide();
+    jQuery("#mdate").show();
+    });
+    jQuery("#mdate").change(function() {
+    jQuery("#ddate").show();
+    });
+      jQuery("#openForum").click(function(){
+      jQuery("#meetingDate").hide();
+      jQuery("#mdate").hide();
+      jQuery("#ddate").hide();
+     });
+});
+</script>
+<p id="note" class="fade-in"><b>Note:</b> Content will be deleted after 2 days.</p>
+<input type="button" id="meetingDate"  value="Optional Meeting Date" style="border:none;display:none;"/><br>
+
+ <br><p id="mdate" style="display:none;" >Please enter a meeting date:<input id="txtDate" type="date" onchange="getdate()"/>
+<p id="ddate"><b><input type="text" id="follow_Date"  style="border:none;" /></b></p>
+<script>
+function getdate() {
+    var tt = document.getElementById('txtDate').value;
+
+    var date = new Date(tt);
+    var newdate = new Date(date);
+
+    newdate.setDate(newdate.getDate() +2);
+    
+    var dd = newdate.getDate();
+    var mm = newdate.getMonth() + 1;
+    var y = newdate.getFullYear();
+
+    var someFormattedDate = dd + '/' + mm + '/' + y;
+    
+document.getElementById('follow_Date').value ="Note: Content will be deleted on: "+someFormattedDate;
+ddate.show();
+}</script>
+<style>
+.fade-in {
+animation: fadeIn ease 2s;
+-webkit-animation: fadeIn ease 2s;
+-moz-animation: fadeIn ease 2s;
+}
+</style>
