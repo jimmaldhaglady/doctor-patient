@@ -263,3 +263,47 @@ jQuery(document).ready(function(){
 
 <!-- holds the popup comments. Can be anywhere between the <body> tags -->
 <div id="comment-holder"></div>
+
+<p id="note" class="fade-in"><b>Note:</b> Content will be deleted after 2 days.</p>
+<input type="button" id="meetingDate"  value="Optional Meeting Date" style="border:none;display:none;"/><br>
+
+ <br><p id="mdate" style="display:none;" >Please enter a meeting date:<input id="txtDate" type="date" onchange="getdate()"/>
+<p id="ddate" style="display:none;"><b><input type="text" id="follow_Date"  style="border:none;" /></b></p>
+<script>
+function getdate() {
+    var tt = document.getElementById('txtDate').value;
+    var date = new Date(tt);
+    var newdate = new Date(date);
+    newdate.setDate(newdate.getDate() +3);
+    
+    var dd = newdate.getDate();
+    var mm = newdate.getMonth() + 1;
+    var y = newdate.getFullYear();
+
+    var someFormattedDate = dd + '/' + mm + '/' + y;
+document.getElementById('follow_Date').value ="Note: Content will be deleted on: "+someFormattedDate;
+ddate.show();
+
+
+
+}</script>
+<style>
+.fade-in {
+animation: fadeIn ease 2s;
+-webkit-animation: fadeIn ease 2s;
+-moz-animation: fadeIn ease 2s;
+}
+</style>
+
+<script>
+function datedecay(){
+// to get today's date
+ var today = new Date();
+var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+//to get meeting date
+var meetingdate = document.getElementById('txtDate').innerHTML;
+var decayln=(meetingdate - date)+2;
+return decayln;
+}
+</script>
+/<!--data-general="decayIn:2 day"-->
